@@ -3,7 +3,7 @@ organization := "com.typesafe.sbteclipse"
 
 name := "sbteclipse"
 
-version := "1.4.0-SNAPSHOT"
+version := "1.4.1-SNAPSHOT"
 
 sbtPlugin := true
 
@@ -19,3 +19,7 @@ publishTo <<= (version) { v =>
 publishMavenStyle := false
 
 credentials += Credentials(Path.userHome / ".ivy2" / ".typesafe-credentials")
+
+resolvers += Classpaths.typesafeSnapshots
+
+seq(ScriptedPlugin.scriptedSettings: _*)

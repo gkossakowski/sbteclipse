@@ -1,0 +1,52 @@
+# eclipse without options
+$ exec find . -name .classpath -delete
+$ exec find . -name .project -delete
+> eclipse
+$ exists .classpath
+$ exists .project
+$ exists sub1/.classpath
+$ exists sub1/.project
+$ exists sub1/sub11/.classpath
+$ exists sub1/sub11/.project
+$ exists sub1/sub12/.classpath
+$ exists sub1/sub12/.project
+
+# eclipse create-src
+$ exec find . -path *src/main/java -exec rm -rf {}
+$ exec find . -path *src/main/resources -exec rm -rf {}
+$ exec find . -path *src/test -exec rm -rf {}
+> eclipse skip-parents
+$ absent .classpath
+$ absent .project
+$ absent sub1/.classpath
+$ absent sub1/.project
+$ exists sub1/sub11/.classpath
+$ exists sub1/sub11/.project
+$ exists sub1/sub12/.classpath
+$ exists sub1/sub12/.project
+
+# eclipse skip-parents
+$ exec find . -name .classpath -delete
+$ exec find . -name .project -delete
+> eclipse skip-parents
+$ absent .classpath
+$ absent .project
+$ absent sub1/.classpath
+$ absent sub1/.project
+$ exists sub1/sub11/.classpath
+$ exists sub1/sub11/.project
+$ exists sub1/sub12/.classpath
+$ exists sub1/sub12/.project
+
+# eclipse skip-root
+$ exec find . -name .classpath -delete
+$ exec find . -name .project -delete
+> eclipse skip-root
+$ absent .classpath
+$ absent .project
+$ exists sub1/.classpath
+$ exists sub1/.project
+$ exists sub1/sub11/.classpath
+$ exists sub1/sub11/.project
+$ exists sub1/sub12/.classpath
+$ exists sub1/sub12/.project
